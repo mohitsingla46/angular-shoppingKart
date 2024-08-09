@@ -1,18 +1,13 @@
-// import { EnvName } from '@enums/environment.enum';
-// import packageInfo from '../../package.json';
+import { EnvName } from '@enums/environment.enum';
+import packageInfo from '../../package.json';
 
-const scheme = 'http://';
-const host   = 'localhost';
-const port   = ':5000';
-const path   = '/api/';
-
-const baseUrl = scheme + host + port + path;
+const baseUrl = "http://localhost:3000";
 
 export const environment = {
   production      : false,
-  // version         : packageInfo.version,
+  version         : packageInfo.version,
   appName         : 'ShoppingKart',
-  // envName         : EnvName.LOCAL,
+  envName         : EnvName.LOCAL,
   defaultLanguage : 'en',
   apiBaseUrl      : baseUrl,
 };

@@ -1,7 +1,6 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
@@ -11,6 +10,8 @@ import {
 import { Router, RouterLink } from '@angular/router';
 
 import { environment } from '@env/environment';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,29 +20,39 @@ import { environment } from '@env/environment';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
-  public appName: string = environment.appName;
-  public formGroup = this.formBuilder.group({
-    email: null,
-    password: null,
-  });
+export class LoginComponent implements OnInit {
+  appName: string = environment.appName;
+  loginForm!: FormGroup;
+  errorMessage: string | null = null;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.formGroup.controls.email.setValidators([
-      Validators.required,
-      Validators.email,
-    ]);
-    this.formGroup.controls.password.setValidators([Validators.required]);
+  router = inject(Router);
+  toastr = inject(ToastrService);
+  authService = inject(AuthService);
+
+  ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required)
+    });
   }
 
   public async onSubmit(): Promise<void> {
-    await this.authenticate();
-  }
+    const email = this.loginForm.get('email')?.value;
+    const password = this.loginForm.get('password')?.value;
 
-  private async authenticate(): Promise<void> {
-    const email    = this.formGroup.controls.email.getRawValue();
-    const password = this.formGroup.controls.password.getRawValue();
-    console.log(email);
-
+    this.authService.login(email, password)
+    .subscribe({
+      next: (response) => {
+        if(response.status == 200){
+          this.toastr.success('Logged in successfully!');
+          this.router.navigate(['/home']);
+        } else {
+          this.toastr.error(response.error);
+        }
+      },
+      error: (error) => {
+        this.toastr.error("Something went wrong at our end. Please try again later.");
+      }
+    });
   }
 }

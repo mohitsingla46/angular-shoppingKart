@@ -8,6 +8,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
+    "resolveJsonModule": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -24,6 +25,7 @@
       "dom"
     ],
     "paths": {
+      "@enums/*": ["src/app/shared/enums/*"],
       "@env/*": ["src/environments/*"]
     }
   },

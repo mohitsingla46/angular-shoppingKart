@@ -60,3 +60,7 @@ button:disabled {
 button:hover:not(:disabled) {
   background-color: #0056b3;
 }
+
+input.ng-invalid.ng-touched {
+  border: red 1px solid;
+}
