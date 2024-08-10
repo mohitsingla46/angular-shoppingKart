@@ -40,11 +40,11 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
 
-    this.authService.login(email, password)
+    this.authService.signin(email, password)
     .subscribe({
       next: (response) => {
-        if(response.status == 200){
-          this.toastr.success('Logged in successfully!');
+        if(response.status === 200){
+          this.toastr.success('You are logged in successfully!');
           this.router.navigate(['/home']);
         } else {
           this.toastr.error(response.error);

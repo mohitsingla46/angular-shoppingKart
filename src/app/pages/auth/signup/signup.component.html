@@ -1,0 +1,89 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>{{ appName }}</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+          [ngClass]="{
+            'is-invalid': signupForm.get('name')?.errors && signupForm.get('name')?.touched
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="signupForm.get('name')?.hasError('required')"
+        >
+          Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="email"
+          [ngClass]="{
+            'is-invalid': signupForm.get('email')?.errors && signupForm.get('email')?.touched
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="signupForm.get('email')?.hasError('required')"
+        >
+          Email is required.
+        </div>
+        <div
+          class="invalid-feedback"
+          *ngIf="signupForm.get('email')?.hasError('email')"
+        >
+          Invalid email format.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          formControlName="password"
+          [ngClass]="{
+            'is-invalid': signupForm.get('password')?.errors && signupForm.get('password')?.touched
+          }"
+          autocomplete="new-password"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="signupForm.get('password')?.hasError('required')"
+        >
+          Password is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select
+          class="form-control"
+          id="role"
+          formControlName="role"
+          [ngClass]="{
+          'is-invalid': signupForm.get('role')?.errors && signupForm.get('role')?.touched
+        }"
+        >
+          <option value="">Select your role</option>
+          <option value="ADMIN">ADMIN</option>
+          <option value="VENDOR">VENDOR</option>
+          <option value="USER">USER</option>
+        </select>
+      </div>
+      <button type="submit">Create Account</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <p>Already have an account? <a routerLink="/">Login</a></p>
+    </div>
+  </div>
+</div>
