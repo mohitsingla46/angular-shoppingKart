@@ -11,7 +11,7 @@ import { Router, RouterLink } from '@angular/router';
 
 import { environment } from '@env/environment';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../auth.service';
+import { AppService } from 'src/app/core/services/app.services';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   router = inject(Router);
   toastr = inject(ToastrService);
-  authService = inject(AuthService);
+  appService = inject(AppService);
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
 
-    this.authService.signin(email, password)
+    this.appService.signin(email, password)
     .subscribe({
       next: (response) => {
         if(response.status === 200){

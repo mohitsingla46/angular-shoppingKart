@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Router, RouterLink } from '@angular/router';
 import { environment } from '@env/environment';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../auth.service';
+import { AppService } from 'src/app/core/services/app.services';
 
 @Component({
   selector: 'app-signup',
@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
 
   router = inject(Router);
   toastr = inject(ToastrService);
-  authService = inject(AuthService);
+  appService = inject(AppService);
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
     const password = this.signupForm.get('password')?.value;
     const role = this.signupForm.get('role')?.value;
 
-    this.authService.signup(name, email, password, role)
+    this.appService.signup(name, email, password, role)
       .subscribe({
         next: (response) => {
           if (response.status === 200) {

@@ -1,0 +1,32 @@
+<div class="d-flex">
+  <app-sidebar></app-sidebar>
+  <div class="content">
+    <app-header></app-header>
+    <div class="container mt-4">
+      <h1>Products</h1>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">In Stock?</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let book of bookList; index as i">
+              <td scope="row">{{ i + 1 }}</td>
+              <td>{{ book.title }}</td>
+              <td>{{ book.category.name }}</td>
+              <td>{{ book.price }}</td>
+              <td>
+                @if (book.inStock == true) {Yes} @else {No}
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
