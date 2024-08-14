@@ -13,11 +13,11 @@ import { SidebarComponent } from 'src/app/shared/components/layouts/sidebar/side
 })
 export class ProductsComponent implements OnInit {
   appService = inject(AppService);
-  bookList = null;
+  productList = null;
   ngOnInit(): void {
-    this.appService.bookList().subscribe((res) => {
+    this.appService.productList().subscribe((res) => {
       if(res.status === 200){
-        this.bookList = res.data;
+        this.productList = res.data;
       }
     });
   }

@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -9,7 +9,7 @@ import { AppService } from 'src/app/core/services/app.services';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf, RouterLink],
+  imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf, NgFor, RouterLink],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -17,6 +17,7 @@ export class SignupComponent implements OnInit {
   appName: string = environment.appName;
   signupForm!: FormGroup;
   errorMessage: string | null = null;
+  roles = null;
 
   router = inject(Router);
   toastr = inject(ToastrService);
@@ -28,6 +29,11 @@ export class SignupComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
+    });
+    this.appService.roles().subscribe((res) => {
+      if(res.status === 200){
+        this.roles = res.data;
+      }
     });
   }
 

@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import { ApiEndpoint } from "../constants/constants";
+import { getHeaders } from "../utils/helpers";
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,9 @@ import { ApiEndpoint } from "../constants/constants";
 export class AppService {
   http = inject(HttpClient);
 
-  headers = new HttpHeaders({
-    'Authorization': `Bearer ${localStorage.getItem('token')}`
-  });
+  roles(): Observable<any> {
+    return this.http.get<string>(`${ApiEndpoint.Roles}`);
+  }
 
   signin(email: string, password: string): Observable<any> {
     return this.http.post<string>(`${ApiEndpoint.SignIn}`, { email, password })
@@ -31,8 +32,8 @@ export class AppService {
     localStorage.removeItem('token');
   }
 
-  bookList(): Observable<any> {
-    return this.http.get<string>(`${ApiEndpoint.BookList}`, { headers: this.headers });
+  productList(): Observable<any> {
+    return this.http.get<string>(`${ApiEndpoint.ProductList}`, { headers: getHeaders() });
   }
 
 }

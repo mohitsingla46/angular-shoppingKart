@@ -74,9 +74,9 @@
         }"
         >
           <option value="">Select your role</option>
-          <option value="ADMIN">ADMIN</option>
-          <option value="VENDOR">VENDOR</option>
-          <option value="USER">USER</option>
+          <option *ngFor="let role of roles" [value]="role.name">
+            {{role.name}}
+          </option>
         </select>
       </div>
       <button type="submit">Create Account</button>

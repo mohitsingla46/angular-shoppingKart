@@ -16,13 +16,13 @@
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let book of bookList; index as i">
+            <tr *ngFor="let product of productList; index as i">
               <td scope="row">{{ i + 1 }}</td>
-              <td>{{ book.title }}</td>
-              <td>{{ book.category.name }}</td>
-              <td>{{ book.price }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.category.name }}</td>
+              <td>{{ product.price }}</td>
               <td>
-                @if (book.inStock == true) {Yes} @else {No}
+                @if (product.inStock == true) {Yes} @else {No}
               </td>
             </tr>
         </tbody>
