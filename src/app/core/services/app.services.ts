@@ -32,6 +32,10 @@ export class AppService {
     localStorage.removeItem('token');
   }
 
+  profile(): Observable<any> {
+    return this.http.get<string>(`${ApiEndpoint.Profile}`, { headers: getHeaders() });
+  }
+
   productList(): Observable<any> {
     return this.http.get<string>(`${ApiEndpoint.ProductList}`, { headers: getHeaders() });
   }
