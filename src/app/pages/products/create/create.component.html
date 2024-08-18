@@ -1,0 +1,118 @@
+<div class="d-flex">
+  <app-sidebar></app-sidebar>
+  <div class="content">
+    <app-header></app-header>
+    <div class="container mt-4">
+      <h1>Add Product</h1>
+      <div class="row">
+        <div class="col-6 m-2">
+          <form [formGroup]="addProductForm" (ngSubmit)="addProduct()">
+            <div class="mb-3">
+              <label for="category" class="form-label">Category</label>
+              <select
+                class="form-select"
+                id="category"
+                formControlName="category"
+                [ngClass]="{
+                  'is-invalid': addProductForm.get('category')?.errors && addProductForm.get('category')?.touched
+                }"
+              >
+                <option value="" disabled selected>Select Category</option>
+                <option
+                  *ngFor="let category of categories"
+                  [value]="category._id"
+                >
+                  {{category.name}}
+                </option>
+              </select>
+              <div
+                class="invalid-feedback"
+                *ngIf="addProductForm.get('category')?.hasError('required')"
+              >
+                Category is required.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Product Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid': addProductForm.get('name')?.errors && addProductForm.get('name')?.touched
+                }"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="addProductForm.get('name')?.hasError('required')"
+              >
+                Product name is required.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="price" class="form-label">Price</label>
+              <input
+                type="number"
+                class="form-control"
+                id="price"
+                formControlName="price"
+                [ngClass]="{
+                  'is-invalid': addProductForm.get('price')?.errors && addProductForm.get('price')?.touched
+                }"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="addProductForm.get('price')?.hasError('required')"
+              >
+                Price is required.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea
+                class="form-control"
+                id="description"
+                formControlName="description"
+                [ngClass]="{
+                  'is-invalid': addProductForm.get('description')?.errors && addProductForm.get('description')?.touched
+                }"
+              ></textarea>
+              <div
+                class="invalid-feedback"
+                *ngIf="addProductForm.get('description')?.hasError('required')"
+              >
+                Description is required.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="inStock" class="form-label">Stock Status</label>
+              <select
+                class="form-select"
+                id="inStock"
+                formControlName="inStock"
+                [ngClass]="{
+                  'is-invalid': addProductForm.get('inStock')?.errors && addProductForm.get('inStock')?.touched
+                }"
+              >
+                <option value="" disabled selected>Select Stock Status</option>
+                <option value="1">In Stock</option>
+                <option value="0">Out of Stock</option>
+              </select>
+              <div
+                class="invalid-feedback"
+                *ngIf="addProductForm.get('inStock')?.hasError('required')"
+              >
+                Stock Status is required.
+              </div>
+            </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary">Add Product</button>
+              <button type="button" class="btn btn-danger m-2" (click)="onCancel()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

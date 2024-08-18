@@ -1,3 +1,7 @@
 .navbar-nav {
   margin-left: auto;
 }
+
+.navbar {
+  margin-left: 0;
+}

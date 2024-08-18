@@ -38,12 +38,13 @@ export class SignupComponent implements OnInit {
   }
 
   public async onSubmit(): Promise<void> {
-    const name = this.signupForm.get('name')?.value;
-    const email = this.signupForm.get('email')?.value;
-    const password = this.signupForm.get('password')?.value;
-    const role = this.signupForm.get('role')?.value;
-
-    this.appService.signup(name, email, password, role)
+    const user = {
+      name: this.signupForm.get('name')?.value,
+      email: this.signupForm.get('email')?.value,
+      password: this.signupForm.get('password')?.value,
+      role: this.signupForm.get('role')?.value
+    };
+    this.appService.signup(user)
       .subscribe({
         next: (response) => {
           if (response.status === 200) {

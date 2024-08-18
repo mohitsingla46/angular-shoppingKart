@@ -24,8 +24,8 @@ export class AppService {
       }));
   }
 
-  signup(name: string, email: string, password: string, role: string): Observable<any> {
-    return this.http.post<string>(`${ApiEndpoint.SignUp}`, { name, email, password, role });
+  signup(user: { name: any; email: any; password: any; role: any; }): Observable<any> {
+    return this.http.post<string>(`${ApiEndpoint.SignUp}`, user);
   }
 
   logout() {
@@ -38,6 +38,14 @@ export class AppService {
 
   productList(): Observable<any> {
     return this.http.get<string>(`${ApiEndpoint.ProductList}`, { headers: getHeaders() });
+  }
+
+  categoryList(): Observable<any> {
+    return this.http.get<string>(`${ApiEndpoint.CategoryList}`, { headers: getHeaders() });
+  }
+
+  addProduct(product: { category_id: any; name: any; description: any; price: any; inStock: any; }): Observable<any> {
+    return this.http.post<string>(`${ApiEndpoint.AddProduct}`, product, { headers: getHeaders() });
   }
 
 }

@@ -78,6 +78,12 @@
             {{role.name}}
           </option>
         </select>
+        <div
+          class="invalid-feedback"
+          *ngIf="signupForm.get('role')?.hasError('required')"
+        >
+          Role is required.
+        </div>
       </div>
       <button type="submit">Create Account</button>
     </form>
