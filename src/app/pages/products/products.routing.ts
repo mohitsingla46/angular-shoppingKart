@@ -18,6 +18,11 @@ export const routes: Routes = [
         path: 'create',
         canActivate: [authGuard],
         loadComponent : () => import('./create/create.component').then(m => m.CreateComponent),
+      },
+      {
+        path: ':id/edit',
+        canActivate: [authGuard],
+        loadComponent : () => import('./edit/edit.component').then(m => m.EditComponent),
       }
     ]
   }

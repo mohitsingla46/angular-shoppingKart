@@ -15,18 +15,25 @@
             <th scope="col">Category</th>
             <th scope="col">Price</th>
             <th scope="col">In Stock?</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of productList; index as i">
-              <td scope="row">{{ i + 1 }}</td>
-              <td>{{ product.name }}</td>
-              <td>{{ product.category.name }}</td>
-              <td>{{ product.price }}</td>
-              <td>
-                @if (product.inStock == true) {Yes} @else {No}
-              </td>
-            </tr>
+          <tr *ngFor="let product of productList; index as i">
+            <td scope="row">{{ i + 1 }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>
+              @if (product.inStock == true) {Yes} @else {No}
+            </td>
+            <td>
+              <a [routerLink]="['/products',product._id,'edit']" class="m-1"
+                ><fa-icon [icon]="faEdit"></fa-icon
+              ></a>
+              <a href="javascript:void(0);" class="m-1 delete-btn" (click)="deleteProduct(product._id)"><fa-icon [icon]="faTrash"></fa-icon></a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

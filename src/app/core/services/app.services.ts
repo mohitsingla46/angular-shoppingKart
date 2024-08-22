@@ -37,7 +37,7 @@ export class AppService {
   }
 
   productList(): Observable<any> {
-    return this.http.get<string>(`${ApiEndpoint.ProductList}`, { headers: getHeaders() });
+    return this.http.get<string>(`${ApiEndpoint.Product}`, { headers: getHeaders() });
   }
 
   categoryList(): Observable<any> {
@@ -45,7 +45,19 @@ export class AppService {
   }
 
   addProduct(product: { category_id: any; name: any; description: any; price: any; inStock: any; }): Observable<any> {
-    return this.http.post<string>(`${ApiEndpoint.AddProduct}`, product, { headers: getHeaders() });
+    return this.http.post<string>(`${ApiEndpoint.Product}`, product, { headers: getHeaders() });
+  }
+
+  productDetails(id: string): Observable<any> {
+    return this.http.get<string>(`${ApiEndpoint.Product}/${id}`, { headers: getHeaders() });
+  }
+
+  updateProduct(id: string, product: { category_id: any; name: any; description: any; price: any; inStock: any; }): Observable<any> {
+    return this.http.put<string>(`${ApiEndpoint.Product}/${id}`, product, { headers: getHeaders() });
+  }
+
+  deleteProduct(id: string): Observable<any> {
+    return this.http.delete<string>(`${ApiEndpoint.Product}/${id}`, { headers: getHeaders() });
   }
 
 }

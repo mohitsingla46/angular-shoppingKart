@@ -5,7 +5,8 @@ export const ApiEndpoint = {
   SignIn: `${environment.apiBaseUrl}/auth/signin`,
   SignUp: `${environment.apiBaseUrl}/auth/signup`,
   Profile: `${environment.apiBaseUrl}/auth/profile`,
-  ProductList: `${environment.apiBaseUrl}/product/list`,
+
   CategoryList: `${environment.apiBaseUrl}/category/list`,
-  AddProduct: `${environment.apiBaseUrl}/product/add_product`
+
+  Product: `${environment.apiBaseUrl}/product`,
 };
